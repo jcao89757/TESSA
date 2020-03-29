@@ -10,9 +10,11 @@ The tessa algorithm is implemented in python and R. We suggest that users execut
 Python (version 3.6.4 preferred), R (version 3.5.1 preferred), Linux (x86_64-redhat-linux-gn) shell (4.2.46(2) preferred)
 
 **Python Packges**
+
 numpy (version 1.15.4 or later), pandas (version 0.23.4 or later), keras (version 2.2.4 or later), os, csv, sys
 
 **R Packages**
+
 Rtsne (version 0.15), MASS (version 7.3-51.4), LaplacesDemon (version 16.1.1) 
 ## Guided tutorial 1: 
 ### Input data
