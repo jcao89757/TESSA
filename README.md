@@ -3,7 +3,7 @@
 ## Introduction
 Tessa is a Bayesian model to intergrate T cell receptor (TCR) sequence profiling with transcriptomes of T cells. Enabled by the recently developed single cell sequencing techniques, which provide both TCR sequences and RNA sequences of each T cell concurrently, Tessa maps the functional landscape of the TCR repertoire, and generates insights into understanding human immune response to diseases. As the first part of tessa, BriseisEncoder is employed prior to the Bayesian algorithm to capture the TCR sequence features and create numerical embeddings. Please refer to our paper for more details: ['Mapping the Functional Landscape of TCR Repertoire'](Pending URL), Zhang Z, Xiong D, et al., 2020. 
 
-Researchers searching for more bioinformatics tools please visit our lab website: https://qbrc.swmed.edu/labs/wanglab/index.php
+Researchers searching for more bioinformatics tools please visit our lab website: https://qbrc.swmed.edu/labs/wanglab/index.php.
 ##  Instructions
 The tessa algorithm is implemented in python and R. We suggest that users execute the python scripts with Linux shell commands.
 ### Dependencies
@@ -17,8 +17,11 @@ numpy (version 1.15.4 or later), pandas (version 0.23.4 or later), keras (versio
 
 Rtsne (version 0.15), MASS (version 7.3-51.4), LaplacesDemon (version 16.1.1) 
 ## Guided tutorial
-In this tutorial, we will show a complete work flow from pre-processing TCR sequences with the BriseisEncoder to constructing TCR networks. The toy example data we used in this tutorial including the TCR sequences and the RNA expression data is availiable [here]().
+In this tutorial, we will show a complete work flow from pre-processing TCR sequences with the BriseisEncoder to constructing TCR networks. The toy example data we used in this tutorial including the TCR sequences and the RNA expression data is availiable [here](https://github.com/jcao89757/TESSA/tree/master/example_data).
+### Installation
+The full tessa algorithm includes all scripts in the folder [BriseisEncoder](https://github.com/jcao89757/TESSA/tree/master/BriseisEncoder) and [Tessa](https://github.com/jcao89757/TESSA/tree/master/Tessa), and the python script [Tessa_main.py](https://github.com/jcao89757/TESSA/blob/master/Tessa_main.py). Please download all the scripts above, save Tessa_main.py in the same path as the two folders, and keep the directry structure unchanged.
 ### Input data
+
 ### Suggested pre-processing workflow
 ### Parameters setting
 ### TCR network construction
