@@ -35,7 +35,7 @@ from keras import Model
 args = sys.argv
 tcr_dir = args[args.index('-tcr')+1]
 model_dir=args[args.index('-model')+1]
-aa_dict_dir=args[args.index('-embeding_vectors')+1]
+aa_dict_dir=args[args.index('-embedding_vectors')+1]
 output_encodedTCR_dir=args[args.index('-output_TCR')+1]
 if '-output_VJ' in args:
     output_encodedVJ_dir=args[args.index('-output_VJ')+1]
@@ -46,11 +46,11 @@ def preprocess(filedir):
     #Preprocess TCR files
     print('Processing: '+filedir)
     if not os.path.exists(filedir):
-        print('Invalid file path: ' + filedir)
+        print('ERROR: invalid file path: ' + filedir)
         return 0
     dataset = pd.read_csv(filedir, header=0)
     if dataset.isnull().values.any():
-        print('Input data contains NAs.')
+        print('ERROR: input data contains NAs.')
         dataset=dataset.dropna()
     data_new=pd.DataFrame({
         'contig_id':dataset['contig_id'],
@@ -73,13 +73,13 @@ def aamapping(peptideSeq,aa_dict,encode_dim):
     #Transform aa seqs to Atchley's factors.
     peptideArray = []
     if len(peptideSeq)>encode_dim:
-        print('Length: '+str(len(peptideSeq))+' over bound!')
+        print('ERROR: aa seq length: '+str(len(peptideSeq))+' is too large!')
         peptideSeq=peptideSeq[0:encode_dim]
     for aa_single in peptideSeq:
         try:
             peptideArray.append(aa_dict[aa_single])
         except KeyError:
-            print('Not proper aaSeqs: '+peptideSeq)
+            print('ERROR: improper aa seqs: '+peptideSeq)
             peptideArray.append(np.zeros(5,dtype='float64'))
     for i in range(0,encode_dim-len(peptideSeq)):
         peptideArray.append(np.zeros(5,dtype='float64'))
@@ -106,7 +106,7 @@ def embedVJ(genelist,maplist):
             ind[find]=1
             VJ_array.append(ind)
         except ValueError:
-            print('Gene out of bound!'+gene)
+            print('ERROR: invalid genes: '+gene)
             VJ_array.append(ind)
             next
     return np.asarray(VJ_array)
@@ -114,7 +114,7 @@ def embedVJ(genelist,maplist):
 #Main functions, data preprocess
 log_file=open(output_log_dir,'w')
 sys.stdout=log_file
-print('Mission loading.')
+print('Loading.')
 tcr=preprocess(tcr_dir)
 aa_dict=dict()
 with open(aa_dict_dir,'r') as aa:
@@ -140,15 +140,15 @@ if 'v_gene' in tcr.columns or 'j_gene' in tcr.columns:
     if 'v_gene' in tcr.columns:
         v_map=embedVJ(tcr['v_gene'],maplist)[:,0:30]
     else:
-        print('V genes are missing!')
+        print('Warning: V genes are missing!')
         v_map=np.zeros((tcr.shape[0],30),dtype='float64')
     if 'j_gene' in tcr.columns:
         j_map = embedVJ(tcr['j_gene'], maplist)[:, 30:32]
     else:
-        print('J genes are missing!')
+        print('Warning: J genes are missing!')
         j_map=np.zeros((tcr.shape[0],2),dtype='float64')
     VJ_map=np.concatenate((v_map,j_map),axis=1)
     VJ_map=pd.DataFrame(data=VJ_map,index=tcr['contig_id'],columns=maplist)
     VJ_map.to_csv(output_encodedVJ_dir,sep=',')
-print('Mission Accomplished.\n')
+print('Complete running, Briseis.\n')
 log_file.close()
