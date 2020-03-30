@@ -46,7 +46,7 @@ exp_raw=read.csv('your/path/raw_example_exp.csv',row.names=1,stringsAsFactors = 
 exp_raw=log(exp_raw+1)
 exp[]=normalize.quantiles(exp_raw)
 ```
-### Parameters setting
+### Model parameters
 
 ### TCR network construction
 ### Example of results
@@ -60,5 +60,11 @@ exp[]=normalize.quantiles(exp_raw)
 ## Version update
 1.0.0: First release. (03-29-2020)
 ```{Shell}
-python3 BriseisEncoder.py -tcr TestCDR3.csv -model Trained_encoder.h5 -embeding_vectors Atchley_factors.csv -output_TCR test.csv -output_VJ testVJ.csv -output_log test.log
+python3 BriseisEncoder.py -tcr ./example_data/example_TCRmeta.csv -model ./BriseisEncoder/TrainedEncoder.h5 -embeding_vectors ./BriseisEncoder/Atchley_factors.csv -output_TCR test.csv -output_VJ testVJ.csv -output_log test.log
+```
+```{shell}
+python3 Tessa_main.py -tcr ./example_data/example_TCRmeta.csv -model ./BriseisEncoder/TrainedEncoder.h5 -embeding_vectors ./BriseisEncoder/Atchley_factors.csv -output_TCR test.csv -output_VJ testVJ.csv -output_log test.log -exp ./example_data/example_exp.csv -output_tessa /path/to/tessa_results/ -within_sample_networks FALSE -predefined_b ./example_data/fixed_b.csv
+```
+```{shell}
+python3 Tessa_main.py -exp ./example_data/example_exp.csv -embedding ./example_data/example_TCRembedding.csv -meta ./example_data/example_TCRmeta.csv -output_tessa /path/to/tessa_results/ -within_sample_networks TRUE
 ```
