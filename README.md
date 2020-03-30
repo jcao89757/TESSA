@@ -24,13 +24,13 @@ The full tessa algorithm includes all scripts in the folder [BriseisEncoder](htt
 The tessa model takes two input data matrices to construct TCR networks. The TCR sequences (or the prepared embedded TCRs, details in **Note 2**), and the single-cell RNA expression levels of the same group of cells.
 1. A meta data matrix contains TCR sequences and cell identifiers. TCR sequences used in tessa are the peptide sequences of TCR-$\beta$ chain CDR3 regions. Cell identifiers are unique for T cells. They could be self-defined IDs, or cell barcodes, etc. The two columns are required in the meta data matrix, and the column names are specified as 'cdr3' and 'contig_id' **(Fig. 1)**. Each row represent one T cell. Please find the [.csv example] (https://github.com/jcao89757/TESSA/blob/master/example_data/example_TCRmeta.csv) for the meta data matrix. 
 
-![meta_example](https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png)
+![meta_example](https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png | width=50)
 
 **Fig.1 |** An example of a TCR meta data matrix in .csv format.
-![exp_example](https://github.com/jcao89757/TESSA/blob/master/example_data/exp_example_fig.png)
+![exp_example](https://github.com/jcao89757/TESSA/blob/master/example_data/exp_example_fig.png | width=50)
 
 **Fig.2 |** An example of an expression data matrix in .csv format.
-![embedding_example](https://github.com/jcao89757/TESSA/blob/master/example_data/embedding_example_fig.png)
+![embedding_example](https://github.com/jcao89757/TESSA/blob/master/example_data/embedding_example_fig.png | width=50)
 
 **Fig.3 |** An example of embedded TCRs in .csv format.
 ### Suggested pre-processing workflow
