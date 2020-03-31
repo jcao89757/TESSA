@@ -26,7 +26,7 @@ The tessa model takes two input data matrices to construct TCR networks. The TCR
 2. A matrix representing the gene expression levels. Columns correspond to cells, rows correspond to genes **(Fig. 2)**. Cells should be in the same order as the cell identifiers in the meta data matrix. Please find the the [.csv example](https://github.com/jcao89757/TESSA/blob/master/example_data/example_exp.csv) for the expression matrix.
 
 [meta_example](https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png)
-<img src="https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png" width="200">
+<img src="https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png" width="500">
 
 **Fig.1 |** An example of a TCR meta data matrix in .csv format.
 ![exp_example](https://github.com/jcao89757/TESSA/blob/master/example_data/exp_example_fig.png)
