@@ -25,11 +25,10 @@ The tessa model takes two input data matrices to construct TCR networks. The TCR
 1. A meta data matrix contains TCR sequences and cell identifiers. TCR sequences used in tessa are the peptide sequences of TCR-beta chain CDR3 regions. Cell identifiers are unique for T cells. They could be self-defined IDs, or cell barcodes, etc. The two columns are required in the meta data matrix, and the column names are specified as 'cdr3' and 'contig_id' **(Fig. 1)**. Each row represent one T cell. Please find the [.csv example ](https://github.com/jcao89757/TESSA/blob/master/example_data/example_TCRmeta.csv) for the meta data matrix. 
 2. A matrix representing the gene expression levels. Columns correspond to cells, rows correspond to genes **(Fig. 2)**. Cells should be in the same order as the cell identifiers in the meta data matrix. Please find the the [.csv example](https://github.com/jcao89757/TESSA/blob/master/example_data/example_exp.csv) for the expression matrix.
 
-[meta_example](https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png)
 <img src="https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png" width="500">
 
 **Fig.1 |** An example of a TCR meta data matrix in .csv format.
-![exp_example](https://github.com/jcao89757/TESSA/blob/master/example_data/exp_example_fig.png)
+<img src="https://github.com/jcao89757/TESSA/blob/master/example_data/exp_example_fig.png" width="500">
 
 **Fig.2 |** An example of an expression data matrix in .csv format.
 ### Suggested pre-processing workflow
@@ -69,7 +68,7 @@ python3 Tessa_main.py -tcr ./example_data/example_TCRmeta.csv -model ./BriseisEn
 ```
 After the script finished running, the embedded TCRs can be checked from the saved .csv file. A typical example is shown [here](https://github.com/jcao89757/TESSA/blob/master/example_data/example_TCRembedding.csv) and in **Fig. 3**.
 
-![embedding_example](https://github.com/jcao89757/TESSA/blob/master/example_data/embedding_example_fig.png)
+<img src="https://github.com/jcao89757/TESSA/blob/master/example_data/embedding_example_fig.png" width="500">
 
 **Fig.3 |** An example of embedded TCRs in .csv format.
 
