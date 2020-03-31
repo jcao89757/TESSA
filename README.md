@@ -25,7 +25,8 @@ The tessa model takes two input data matrices to construct TCR networks. The TCR
 1. A meta data matrix contains TCR sequences and cell identifiers. TCR sequences used in tessa are the peptide sequences of TCR-beta chain CDR3 regions. Cell identifiers are unique for T cells. They could be self-defined IDs, or cell barcodes, etc. The two columns are required in the meta data matrix, and the column names are specified as 'cdr3' and 'contig_id' **(Fig. 1)**. Each row represent one T cell. Please find the [.csv example ](https://github.com/jcao89757/TESSA/blob/master/example_data/example_TCRmeta.csv) for the meta data matrix. 
 2. A matrix representing the gene expression levels. Columns correspond to cells, rows correspond to genes **(Fig. 2)**. Cells should be in the same order as the cell identifiers in the meta data matrix. Please find the the [.csv example](https://github.com/jcao89757/TESSA/blob/master/example_data/example_exp.csv) for the expression matrix.
 
-![meta_example](https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png)
+[meta_example](https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png)
+<img src="https://github.com/jcao89757/TESSA/blob/master/example_data/meta_example_fig.png" width="20">
 
 **Fig.1 |** An example of a TCR meta data matrix in .csv format.
 ![exp_example](https://github.com/jcao89757/TESSA/blob/master/example_data/exp_example_fig.png)
