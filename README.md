@@ -39,6 +39,7 @@ The meta data matrix is suggested to be double-checled and make sure that each e
 For the expression data, the log-transformation is always suggested if the data distribution is right-skewed. Users are encouraged to select their own way to normalize the data. Some useful papers are listed below for you to refer.
 1. [Hafemeister, Christoph, and Rahul Satija. "Normalization and variance stabilization of single-cell RNA-seq data using regularized negative binomial regression." Genome Biology 20, no. 1 (2019): 1-15.](https://link.springer.com/article/10.1186/s13059-019-1874-1)
 2. [Vallejos, Catalina A., Davide Risso, Antonio Scialdone, Sandrine Dudoit, and John C. Marioni. "Normalizing single-cell RNA sequencing data: challenges and opportunities." Nature methods 14, no. 6 (2017): 565.](https://www.nature.com/articles/nmeth.4292)
+
 Moreover, the expression matrix can be replaced with the results from treating it with typical dimension reduction methods, for example, PCA, t-SNE, or UMAP, as long as the format matches the original expression matrix (coordinates or features on the rows, and cell identifiers on the columns).
 ### Model parameters
 The tessa model takes a series of input items listed in the table below.
