@@ -1,19 +1,18 @@
-args=commandArgs(trailingOnly = T)
-exp_file=args[1]
-contigs_file=args[2]
-cdr3_file=args[3]
-save=args[4]
-is_sampleCluster=args[5]
-fixed_b=args[6]
+args=commandArgs(trailingOnly = TRUE)
+exp_file=args[2]
+contigs_file=args[3]
+cdr3_file=args[4]
+save=args[5]
+is_sampleCluster=as.logical(args[6])
+fixed_b=args[7]
 xi=1e+25
 g=0.001
 initialize_cluster_factor=6
-setwd('.')
-source('update.R')
-source('initialization.R')
-source('MCMC_control.R')
-source('utility.R')
-source('post_analysis.R')
+source(paste(args[1],'update.R',sep='/'))
+source(paste(args[1],'initialization.R',sep='/'))
+source(paste(args[1],'MCMC_control.R',sep='/'))
+source(paste(args[1],'utility.R',sep='/'))
+source(paste(args[1],'post_analysis.R',sep='/'))
 library(MASS)
 library(LaplacesDemon)
 library(Rtsne)
@@ -41,8 +40,7 @@ if(is_sampleCluster){
 }else{
   sample_id=NULL
 }
-#02032020 test fixed b
-if(!is.na(fixed_b)){
+if(fixed_b!='NA'){
   b=read.csv(fixed_b,header=TRUE,stringsAsFactors=F)$b
 }else{
   b=NULL

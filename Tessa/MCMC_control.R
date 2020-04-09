@@ -15,7 +15,6 @@ Tessa<-function(e,cdr3,t,hyper_priors,max_iter,sample_id=NULL,save=NULL,b=NULL,s
   }else{
     preset_b=FALSE
   }
-  print(seed_num)
   initialized=initialize(t,cdr3,e,hyper_priors,sample_id,b,seed_num=seed_num)
   t=initialized$t;meta=initialized$meta;a=initialized$a;b=initialized$b;sigma=initialized$sigma;
   K=initialized$K;ak=initialized$ak;phi=initialized$phi;t0=initialized$t0;
