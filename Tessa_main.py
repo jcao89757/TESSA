@@ -13,10 +13,14 @@ __email__='ze.zhang@utsouthwestern.edu'
 import sys
 import os
 from os.path import dirname
-sys.path.append(dirname('./BriseisEncoder'))
-sys.path.append(dirname('./Tessa'))
 args = sys.argv
-
+sys.path.append(dirname(args[0]))
+sys.path.append(dirname(args[0])+'/BriseisEncoder')
+sys.path.append(dirname(args[0])+'/Tessa')
+if dirname(args[0]) is '':
+  base_path='.'
+else:
+  base_path=dirname(args[0])
 if '-tcr' in args:
     #Mode 1: Briseis encoder + Tessa
     # #Step 1: Run BriseisEncoder
@@ -27,12 +31,12 @@ if '-tcr' in args:
     output_log_dir = args[args.index('-output_log') + 1]
     if '-output_VJ' in args:
         output_encodedVJ_dir=args[args.index('-output_VJ')+1]
-        cmd_encoder = ' '.join(['python3', './BriseisEncoder/BriseisEncoder.py', '-tcr', tcr_dir, '-model',
+        cmd_encoder = ' '.join(['python3', base_path+'/BriseisEncoder/BriseisEncoder.py', '-tcr', tcr_dir, '-model',
                                 model_dir, '-embedding_vectors', aa_dict_dir,'-output_TCR',
                                 output_encodedTCR_dir, '-output_VJ', output_encodedVJ_dir,
                                 '-output_log', output_log_dir])
     else:
-        cmd_encoder = ' '.join(['python3', './BriseisEncoder/BriseisEncoder.py', '-tcr', tcr_dir, '-model',
+        cmd_encoder = ' '.join(['python3', base_path+'/BriseisEncoder/BriseisEncoder.py', '-tcr', tcr_dir, '-model',
                                 model_dir, '-embedding_vectors', aa_dict_dir, '-output_TCR',
                                 output_encodedTCR_dir,'-output_log', output_log_dir])
     os.system(cmd_encoder)
@@ -46,7 +50,7 @@ if '-tcr' in args:
         fixed_b = args[args.index('-predefined_b')+1]
     else:
         fixed_b='NA'
-    cmd_tessa1 = ' '.join(['Rscript', './Tessa/real_data.R', exp_file, contigs_file, cdr3_file,
+    cmd_tessa1 = ' '.join(['Rscript', base_path+'/Tessa/real_data.R', base_path+'/Tessa',exp_file, contigs_file, cdr3_file,
                             save_tessa, is_sampleCluster, fixed_b])
     os.system(cmd_tessa1)
 if '-embedding' in args:
@@ -60,7 +64,7 @@ if '-embedding' in args:
         fixed_b = args[args.index('-predefined_b') + 1]
     else:
         fixed_b = 'NA'
-    cmd_tessa2 = ' '.join(['Rscript', './Tessa/real_data.R', exp_file, contigs_file, cdr3_file,
+    cmd_tessa2 = ' '.join(['Rscript', base_path+'/Tessa/real_data.R', base_path+'/Tessa',exp_file, contigs_file, cdr3_file,
                            save_tessa, is_sampleCluster, fixed_b])
     os.system(cmd_tessa2)
 else:
