@@ -31,8 +31,8 @@ n=ncol(exp_data)
 tmp=apply(exp_data,1,sd)
 e=t(Rtsne(t(exp_data[tmp>quantile(tmp,0.9),1:n]),dims=3)$Y) # Run TSNE
 colnames(e)=colnames(exp_data)[1:n]
-contigs_encoded=read.csv(contigs_file,row.names=1,stringsAsFactors=F)
-t=t(contigs_encoded[1:n,])
+contigs_encoded=read.csv(contigs_file,stringsAsFactors=F)
+t=t(contigs_encoded[1:n,-1])
 meta=read.csv(cdr3_file,header=TRUE,stringsAsFactors=F)
 cdr3=meta$cdr3
 if(is_sampleCluster){
