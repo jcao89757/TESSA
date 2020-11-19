@@ -67,12 +67,12 @@ After the script finished running, the embedded TCRs can be checked from the sav
 
 **Fig.3 |** An example of embedded TCRs in .csv format.
 
-The TCR network result 'tessa_final.RData' is saved in the tessa result folder and can be checked with the following code. Please find a typical examle [here](https://github.com/jcao89757/TESSA/blob/master/example_data/rexult_tessa_final_example.RData)
+The TCR network result 'tessa_final.RData' is saved in the tessa result folder and can be checked with the following code. Please find a typical example [here](https://github.com/jcao89757/TESSA/blob/master/example_data/rexult_tessa_final_example.RData).
 ```{r}
 load('tessa_final.RData')
 m=tessa_results$meta
 ```
-The matrix m has three columns. The 'barcode' column contains the same cell identifiers we used in the expression matrix (the column names) and the meta data matrix (the 'contig_id' column). The 'group_ID's are the TCR sequences of the cells. The column 'cluster_number' contains the TCR sequences of the centered TCRs in the networks. The cells that have the same 'cluster_number' are in the same network. 
+The matrix m has three columns. The 'barcode' column contains the same cell identifiers we used in the expression matrix (the column names) and the meta data matrix (the 'contig_id' column). The 'group_ID's are the TCR sequences of the cells. The column 'cluster_number' contains the TCR sequences of the centered TCRs in the networks. The cells that have the same 'cluster_number' are in the same network.Please find a typical example [here](https://github.com/jcao89757/TESSA/blob/master/example_data/rexult_meta_example.csv) abd in **Fig. 4**.
 
 The running time of the script was tested on a node with 48 logical cores and 256GB memory in the UT Southwestern Nucleus compute cluster. Converting the TCRs to embeddings typically spends less than 5s. It took 5.8 mins to construct the tessa networks on the 500-cell example data used in this tutorial. For a real dataset contains about 8000 cells, the running time could range between 4 to 5 hours.
 ## Note 1: Run BriseisEncoder to generate TCR embeddings.
