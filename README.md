@@ -67,7 +67,7 @@ After the script finished running, the embedded TCRs can be checked from the sav
 
 **Fig.3 |** An example of embedded TCRs in .csv format.
 
-The TCR network result 'tessa_final.RData' is saved in the tessa result folder and can be checked with the following code.
+The TCR network result 'tessa_final.RData' is saved in the tessa result folder and can be checked with the following code. Please find a typical examle [here](https://github.com/jcao89757/TESSA/blob/master/example_data/rexult_tessa_final_example.RData)
 ```{r}
 load('tessa_final.RData')
 m=tessa_results$meta
