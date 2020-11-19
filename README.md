@@ -34,7 +34,7 @@ The tessa model takes two input data matrices to construct TCR networks. The TCR
 
 **Fig.2 |** An example of an expression data matrix in .csv format.
 ### Suggested pre-processing workflow
-The meta data matrix is suggested to be double-checled and make sure that each element in the column 'contig_id' is unique. The 'cdr3' column allows deplicates, but sequences with any letters, numbers or symbols that do not represent amino acids should be removed. 
+The meta data matrix is suggested to be double-checked and make sure that each element in the column 'contig_id' is unique. The 'cdr3' column allows deplicates, but sequences with any letters, numbers or symbols that do not represent amino acids should be removed. 
 
 For the expression data, the log-transformation is always suggested if the data distribution is right-skewed. Users are encouraged to select their own way to normalize the data. Some useful papers are listed below for you to refer.
 1. [Hafemeister, Christoph, and Rahul Satija. "Normalization and variance stabilization of single-cell RNA-seq data using regularized negative binomial regression." Genome Biology 20, no. 1 (2019): 1-15.](https://link.springer.com/article/10.1186/s13059-019-1874-1)
