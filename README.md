@@ -91,6 +91,7 @@ python3 Tessa_main.py -exp ./example_data/example_exp.csv -embedding ./example_d
 ```
 ## Version update
 1.0.0: First release. (03-29-2020)
+
 1.1.0: Update output and add visulization functions. (11-19-2020)
 
 
