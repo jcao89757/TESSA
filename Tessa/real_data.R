@@ -52,3 +52,4 @@ max_iter=1000
 #save="~/projects/scTCR/data/Tessa_save"
 # Tessa
 tessa_results=Tessa(e,cdr3,t,hyper_priors,max_iter,sample_id,save,b)
+plot_tessaClsuters(tessa_results,save)
