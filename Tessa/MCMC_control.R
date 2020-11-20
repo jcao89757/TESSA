@@ -15,6 +15,7 @@ Tessa<-function(e,cdr3,t,hyper_priors,max_iter,sample_id=NULL,save=NULL,b=NULL,s
   }else{
     preset_b=FALSE
   }
+  print(seed_num)
   initialized=initialize(t,cdr3,e,hyper_priors,sample_id,b,seed_num=seed_num)
   t=initialized$t;meta=initialized$meta;a=initialized$a;b=initialized$b;sigma=initialized$sigma;
   K=initialized$K;ak=initialized$ak;phi=initialized$phi;t0=initialized$t0;
@@ -57,24 +58,6 @@ Tessa<-function(e,cdr3,t,hyper_priors,max_iter,sample_id=NULL,save=NULL,b=NULL,s
     updated_recent=c(b_result$updated,updated_recent)
     if (length(updated_recent)>200) {updated_recent=updated_recent[1:200]}
     cat(paste("  Recent b acceptance rate:",round(sum(updated_recent)/length(updated_recent),d=2),"\n"))
-  
-    # save
-    if (!is.null(save))
-    {
-      #tessa_results=list(b=b,meta_dedup=meta_dedup,sigma=sigma,K=K,cluster_rate=cluster_rate)
-      tessa_results=list(b=b,a=a,sigma=sigma,ak=ak)
-      save(tessa_results,file=paste(save,"/tessa_",iter,".RData",sep=""))
-    }
-    
-    # check
-    # if (any(sapply(de,function(x) length(x))!=phi)) {stop(1)}
-    # for(k in 1:K)
-    # {
-    #   c=names(phi)[k]
-    #   group=unique(meta_dedup$group_ID[meta_dedup$cluster_number==c])
-    #   if (abs(sum(de[[c]])-sum(master_dist_e[names(phi)[k],group]))>0.01) {stop(2)}
-    #   if (abs(sum(dt[[c]])-sum(colSums((t[,group,drop=F]-t[,c])^2/b/2)))>0.01) {stop(3)}
-    # }
   }
   
   # wrap up
@@ -83,5 +66,6 @@ Tessa<-function(e,cdr3,t,hyper_priors,max_iter,sample_id=NULL,save=NULL,b=NULL,s
   tessa_results=list(b=b,meta=meta,master_dist_e=master_dist_e,a=a,ak=ak,sigma=sigma,dt=dt,de=de,
     t=t,meta_dedup=meta_dedup,phi=phi,K=K)
   save(tessa_results,file=paste(save,"/tessa_final.RData",sep=""))
-  tessa_results
+  write.csv(meta,file=paste(save,"/result_meta.csv",sep=""),quote=F,row.names=FALSE)
+  return(tessa_results)
 }
