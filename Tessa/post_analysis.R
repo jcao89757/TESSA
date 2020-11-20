@@ -96,28 +96,36 @@ predict_tessa<-function(tessa_results,t_new,cutoff=NA)
   cluster_new=cutree(hclust(dist(t(t_new/sqrt(b)),method='manhattan'),method='single'),h=cutoff)
 }
 
-plot_Tessa_clusters=function(tessa_results,folder){
-  library(igraph)
-  meta=tessa_results$meta_dedup
-  relations=data.frame('source'=meta$group_ID,'target'=meta$cluster_number,stringsAsFactors = F)
-  node_size=setNames(sqrt(as.vector(table(tessa_results$meta$group_ID))),
-                     meta$group_ID)
-  relations = relations[relations[,1]!=relations[,2], ]
-  verticies=data.frame('name'=unique(c(relations$source,relations$target)),stringsAsFactors = F)
-  node_size=node_size[verticies$name]
-  g=graph_from_data_frame(relations,directed=F,vertices = verticies)
-  verticies$group=edge.betweenness.community(g)$membership
-  pdf(paste(folder,"/TCR_explore_clusters.pdf",sep=""),width=20,height=20)
-  plot.igraph(g,
-       #mark.groups=verticies$group, # group vertices by betweeness indicator (redish blob background)
-       layout=layout.auto, 
-       vertex.color = verticies$group, # color vertices by edge betweeness
-       vertex.label=NA, # no vertex label (name)
-       edge.arrow.size=1,
-       edge.arrow.width=1,
-       edge.width=4,
-       edge.lty="solid",
-       vertex.size=node_size)
-  dev.off()
+plot_tessaClsuters=function(tessa_results,save_path){
+  meta=tessa_results$meta
+  meta_dedup=tessa_results$meta_dedup
+  b=tessa_results$b
+  tb=table(meta$group_ID)
+  meta_dedup$clonalsize=tb[match(meta_dedup$group_ID,names(tb))]
+  t=tessa_results$t
+  phi=tessa_results$phi
+  keep=names(phi)[phi>quantile(phi,0.75)]
+  t=t[,meta_dedup$cluster_number%in%keep]
+  meta_dedup=meta_dedup[meta_dedup$cluster_number%in%keep,]
+  set.seed(123)
+  data2plot=data.frame(Rtsne(t(t/sqrt(b)),dims = 2)$Y)
+  colnames(data2plot)=c('tSNE_1','tSNE_2')
+  row.names(data2plot)=meta_dedup$group_ID
+  data2plot$clonalsize=as.numeric(meta_dedup$clonalsize)
+  colorbase=colorRampPalette(rainbow(8))(length(keep))
+  g=ggplot()+theme_bw(base_size = 12)+guides(size=FALSE)+
+    xlim(range(data2plot$tSNE_1))+ylim(range(data2plot$tSNE_2))
+  for(i in 1:length(unique(meta_dedup$cluster_number))){
+    select_cluster=unique(meta_dedup$cluster_number)[i]
+    meta_dedup_tmp=meta_dedup[meta_dedup$cluster_number==select_cluster,]
+    data_tmp=data2plot[meta_dedup$cluster_number==select_cluster,]
+    center=which(meta_dedup_tmp$group_ID==meta_dedup_tmp$cluster_number)
+    data_tmp$ct1=data_tmp$tSNE_1[center]
+    data_tmp$ct2=data_tmp$tSNE_2[center]
+    g=g+geom_segment(data = data_tmp,color='grey80',aes(x=tSNE_1,y=tSNE_2,xend=ct1,yend=ct2),size=0.1)+
+      geom_point(data = data_tmp,color=colorbase[i],alpha=0.8,aes(x=tSNE_1,y=tSNE_2,size=sqrt(clonalsize)))
+  }
+  ggsave(filename =paste(save_path,'/cluster_figure.pdf',sep = ''),plot = g,height=8,width=8)
 }
+
   
