@@ -93,6 +93,6 @@ python3 Tessa_main.py -exp ./example_data/example_exp.csv -embedding ./example_d
 1.0.0: First release. (03-29-2020)
 
 ## Citation
-Zhang, Z., Xiong, D., Wang, X. et al. Mapping the functional landscape of T cell receptor repertoires by single-T cell transcriptomics. *Nat Methods* **18**, 92–99 (2021).
+[Zhang, Z., Xiong, D., Wang, X. et al. Mapping the functional landscape of T cell receptor repertoires by single-T cell transcriptomics. *Nat Methods* **18**, 92–99 (2021).](https://doi.org/10.1038/s41592-020-01020-3)
 
 
