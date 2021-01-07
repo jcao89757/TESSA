@@ -1,7 +1,7 @@
 ![QBRC_logo](https://github.com/jcao89757/SCINA/blob/master/QBRC.jpg)
 # Tessa
 ## Introduction
-Tessa is a Bayesian model to integrate T cell receptor (TCR) sequence profiling with transcriptomes of T cells. Enabled by the recently developed single cell sequencing techniques, which provide both TCR sequences and RNA sequences of each T cell concurrently, Tessa maps the functional landscape of the TCR repertoire, and generates insights into understanding human immune response to diseases. As the first part of tessa, BriseisEncoder is employed prior to the Bayesian algorithm to capture the TCR sequence features and create numerical embeddings. Please refer to our paper for more details: ['Mapping the Functional Landscape of TCR Repertoire'](Pending URL), Zhang Z, Xiong D, et al., 2020. 
+Tessa is a Bayesian model to integrate T cell receptor (TCR) sequence profiling with transcriptomes of T cells. Enabled by the recently developed single cell sequencing techniques, which provide both TCR sequences and RNA sequences of each T cell concurrently, Tessa maps the functional landscape of the TCR repertoire, and generates insights into understanding human immune response to diseases. As the first part of tessa, BriseisEncoder is employed prior to the Bayesian algorithm to capture the TCR sequence features and create numerical embeddings. Please refer to our paper for more details: ['Mapping the Functional Landscape of TCR Repertoire'](https://www.nature.com/articles/s41592-020-01020-3), Zhang Z, Xiong D, et al., 2020. 
 
 Researchers searching for more bioinformatics tools please visit our lab website: https://qbrc.swmed.edu/labs/wanglab/index.php.
 ##  Instructions
@@ -92,5 +92,7 @@ python3 Tessa_main.py -exp ./example_data/example_exp.csv -embedding ./example_d
 ## Version update
 1.0.0: First release. (03-29-2020)
 
+## Citation
+Zhang, Z., Xiong, D., Wang, X. et al. Mapping the functional landscape of T cell receptor repertoires by single-T cell transcriptomics. Nat Methods 18, 92–99 (2021).
 
 
