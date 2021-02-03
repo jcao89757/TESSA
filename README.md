@@ -13,6 +13,7 @@ Python (version 3.6.4), R (version 3.5.1 preferred), Linux (x86_64-redhat-linux-
 **Python Packges**
 
 A full list of python packages within the author's conda environment is availiable [here](https://github.com/jcao89757/TESSA/blob/1.2.0/tessa_dependencies.txt).
+
 tensorflow (version 1.11.0), numpy (version 1.19.5), pandas (version 0.23.4), keras (version 2.2.4, tensorflow backend), os, csv, sys
 
 **R Packages**
