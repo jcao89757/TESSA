@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-03/26/2020 Tessa_main.py: This script serves as a wrapper of BriseisEncoder and Tessa, to generate TCR sequence embedding,
+03/26/2020 Tessa_main.py: This script serves as a wrapper of BriseisEncoder and Tessa, to generate TCR sequence embeding,
 and/or to estimate functional landscape of TCR repertoire when combined with single-cell sequencing of T cells. Please
 find more details in our paper: Mapping the Functional Landscape of TCR Repertoire. Zhang Z, Xiong D, et al.
 """
@@ -26,18 +26,18 @@ if '-tcr' in args:
     # #Step 1: Run BriseisEncoder
     tcr_dir = args[args.index('-tcr')+1]
     model_dir=args[args.index('-model')+1]
-    aa_dict_dir=args[args.index('-embedding_vectors')+1]
+    aa_dict_dir=args[args.index('-embeding_vectors')+1]
     output_encodedTCR_dir=args[args.index('-output_TCR')+1]
     output_log_dir = args[args.index('-output_log') + 1]
     if '-output_VJ' in args:
         output_encodedVJ_dir=args[args.index('-output_VJ')+1]
         cmd_encoder = ' '.join(['python3', base_path+'/BriseisEncoder/BriseisEncoder.py', '-tcr', tcr_dir, '-model',
-                                model_dir, '-embedding_vectors', aa_dict_dir,'-output_TCR',
+                                model_dir, '-embeding_vectors', aa_dict_dir,'-output_TCR',
                                 output_encodedTCR_dir, '-output_VJ', output_encodedVJ_dir,
                                 '-output_log', output_log_dir])
     else:
-        cmd_encoder = ' '.join(['python3', base_path+'/BriseisEncoder/BriseisEncoder.py', '-tcr', tcr_dir, '-model',
-                                model_dir, '-embedding_vectors', aa_dict_dir, '-output_TCR',
+        cmd_encoder = ' '.join(['python', base_path+'/BriseisEncoder/BriseisEncoder.py', '-tcr', tcr_dir, '-model',
+                                model_dir, '-embeding_vectors', aa_dict_dir, '-output_TCR',
                                 output_encodedTCR_dir,'-output_log', output_log_dir])
     os.system(cmd_encoder)
     #Step 2: Run Tessa
@@ -53,10 +53,13 @@ if '-tcr' in args:
     cmd_tessa1 = ' '.join(['Rscript', base_path+'/Tessa/real_data.R', base_path+'/Tessa',exp_file, contigs_file, cdr3_file,
                             save_tessa, is_sampleCluster, fixed_b])
     os.system(cmd_tessa1)
-if '-embedding' in args:
+
+else:
+    sys.exit('ERROR: please input valid TCRs/embeding.')
+if '-embeding' in args:
     #Mode 2: Tessa only
     exp_file = args[args.index('-exp') + 1]
-    contigs_file = args[args.index('-embedding') + 1]
+    contigs_file = args[args.index('-embeding') + 1]
     cdr3_file = args[args.index('-meta') + 1]
     save_tessa = args[args.index('-output_tessa') + 1]
     is_sampleCluster = args[args.index('-within_sample_networks') + 1]
@@ -67,5 +70,3 @@ if '-embedding' in args:
     cmd_tessa2 = ' '.join(['Rscript', base_path+'/Tessa/real_data.R', base_path+'/Tessa',exp_file, contigs_file, cdr3_file,
                            save_tessa, is_sampleCluster, fixed_b])
     os.system(cmd_tessa2)
-else:
-    sys.exit('ERROR: please input valid TCRs/embedding.')
