@@ -51,7 +51,7 @@ The tessa model takes a series of input items listed in the table below.
 |----------|-------|
 |tcr|A .csv file contains the meta data matrix described in **Input data**.|
 |model|A .h5 file contains a well-trained auto-encoder model used in the BriseisEncoder. Users can find the model in the BriseisEncoder folder.|
-|embedding_vectors|A .csv file contains the 'Atchley factors' of all amino acids used in the first step of the BriseisEncoder. Users can find the file in the BriseisEncoder folder.|
+|embeding_vectors|A .csv file contains the 'Atchley factors' of all amino acids used in the first step of the BriseisEncoder. Users can find the file in the BriseisEncoder folder.|
 |output_TCR|A name of a .csv file that will be created by the model to save the embedded TCRs.|
 |output_VJ|(Optional) A name of a .csv file that will be created by the model. If the meta data matrix contains one or two of the optional columns, 'v_gene' and 'j_gene', which denotes the V gene and J gene subgroups (TRBV1-30 and TRBJ1/2) of TRB recombinants, the BriseisEncoder will perform one-hot encoding on those genes and save the encodings in this file for any future uses.|
 |output_log|A plain text log file to record any errors or warnings from the BriseisEncoder.|
