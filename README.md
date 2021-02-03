@@ -1,21 +1,23 @@
 ![QBRC_logo](https://github.com/jcao89757/SCINA/blob/master/QBRC.jpg)
 # Tessa
 ## Introduction
-Tessa is a Bayesian model to integrate T cell receptor (TCR) sequence profiling with transcriptomes of T cells. Enabled by the recently developed single cell sequencing techniques, which provide both TCR sequences and RNA sequences of each T cell concurrently, Tessa maps the functional landscape of the TCR repertoire, and generates insights into understanding human immune response to diseases. As the first part of tessa, BriseisEncoder is employed prior to the Bayesian algorithm to capture the TCR sequence features and create numerical embeddings. Please refer to our paper for more details: ['Mapping the Functional Landscape of TCR Repertoire'](Pending URL), Zhang Z, Xiong D, et al., 2020. 
+Tessa is a Bayesian model to integrate T cell receptor (TCR) sequence profiling with transcriptomes of T cells. Enabled by the recently developed single cell sequencing techniques, which provide both TCR sequences and RNA sequences of each T cell concurrently, Tessa maps the functional landscape of the TCR repertoire, and generates insights into understanding human immune response to diseases. As the first part of tessa, BriseisEncoder is employed prior to the Bayesian algorithm to capture the TCR sequence features and create numerical embeddings. Please refer to our paper for more details: ['Mapping the Functional Landscape of TCR Repertoire.'](https://www.nature.com/articles/s41592-020-01020-3),Zhang, Z., Xiong, D., Wang, X. et al. 2021.
 
 Researchers searching for more bioinformatics tools please visit our lab website: https://qbrc.swmed.edu/labs/wanglab/index.php.
 ##  Instructions
 The tessa algorithm is implemented in python and R. We suggest that users execute the python scripts with Linux shell commands.
 ### Dependencies
-Python (version 3.6.4 preferred), R (version 3.5.1 preferred), Linux (x86_64-redhat-linux-gn) shell (4.2.46(2) preferred)
+
+Python (version 3.6.4), R (version 3.5.1 preferred), Linux (x86_64-redhat-linux-gn) shell (4.2.46(2) preferred)
 
 **Python Packges**
 
-numpy (version 1.15.4 or later), pandas (version 0.23.4 or later), keras (version 2.2.4 or later), os, csv, sys
+A full list of python packages within the author's conda environment is availiable [here](https://github.com/jcao89757/TESSA/blob/1.2.0/tessa_dependencies.txt).
+tensorflow (version 1.11.0), numpy (version 1.19.5), pandas (version 0.23.4), keras (version 2.2.4, tensorflow backend), os, csv, sys
 
 **R Packages**
 
-Rtsne (version 0.15), MASS (version 7.3-51.4), LaplacesDemon (version 16.1.1) 
+Rtsne (version 0.15), MASS (version 7.3-51.4), LaplacesDemon (version 16.1.1), igraph (version 1.2.2)
 ## Guided tutorial
 In this tutorial, we will show a complete work flow from pre-processing TCR sequences with the BriseisEncoder to constructing TCR networks. The toy example data we used in this tutorial including the TCR sequences and the RNA expression data is availiable [here](https://github.com/jcao89757/TESSA/tree/master/example_data).
 ### Installation
@@ -59,7 +61,7 @@ The tessa model takes a series of input items listed in the table below.
 ### TCR network construction
 The tessa model construct TCR networks with the following command.
 ```{shell}
-python3 Tessa_main.py -tcr ./example_data/example_TCRmeta.csv -model ./BriseisEncoder/TrainedEncoder.h5 -embedding_vectors ./BriseisEncoder/Atchley_factors.csv -output_TCR test.csv -output_VJ testVJ.csv -output_log test.log -exp ./example_data/example_exp.csv -output_tessa /path/to/tessa_results/ -within_sample_networks FALSE
+python3 Tessa_main.py -tcr ./example_data/example_TCRmeta.csv -model ./BriseisEncoder/TrainedEncoder.h5 -embeding_vectors ./BriseisEncoder/Atchley_factors.csv -output_TCR test.csv -output_VJ testVJ.csv -output_log test.log -exp ./example_data/example_exp.csv -output_tessa /path/to/tessa_results/ -within_sample_networks FALSE
 ```
 After the script finished running, the embedded TCRs can be checked from the saved .csv file. A typical example is shown [here](https://github.com/jcao89757/TESSA/blob/master/example_data/example_TCRembedding.csv) and in **Fig. 3**.
 
@@ -71,6 +73,7 @@ The TCR network result 'tessa_final.RData' is saved in the tessa result folder a
 ```{r}
 load('tessa_final.RData')
 m=tessa_results$meta
+plot_Tessa_clusters(tessa_results,/path/to/your/figure/folder/)
 ```
 The matrix m has three columns. The 'barcode' column contains the same cell identifiers we used in the expression matrix (the column names) and the meta data matrix (the 'contig_id' column). The 'group_ID's are the TCR sequences of the cells. The column 'cluster_number' contains the TCR sequences of the centered TCRs in the networks. The cells that have the same 'cluster_number' are in the same network.Please find a typical example [here](https://github.com/jcao89757/TESSA/blob/master/example_data/rexult_meta_example.csv) abd in **Fig. 4**.
 
@@ -82,17 +85,20 @@ The running time of the script was tested on a node with 48 logical cores and 25
 ## Note 1: Run BriseisEncoder to generate TCR embeddings.
 The BriseisEncoder can be used as part of the tessa model, or as a separate tool to generate numerical TCR embeddings for the usage of any other future algorithms, as shown in the code below. All the parameter settings in the following code are the same as we described in **Model parameters**. The embedded TCRs generated by the BriseisEncoder are similar to **Fig. 3**.
 ```{Shell}
-python3 ./BriseisEncoder/BriseisEncoder.py -tcr ./example_data/example_TCRmeta.csv -model ./BriseisEncoder/TrainedEncoder.h5 -embedding_vectors ./BriseisEncoder/Atchley_factors.csv -output_TCR test.csv -output_VJ testVJ.csv -output_log test.log
+python3 ./BriseisEncoder/BriseisEncoder.py -tcr ./example_data/example_TCRmeta.csv -model ./BriseisEncoder/TrainedEncoder.h5 -embeding_vectors ./BriseisEncoder/Atchley_factors.csv -output_TCR test.csv -output_VJ testVJ.csv -output_log test.log
 ```
 ## Note 2: Run tessa with prepared embedded TCRs.
 TCR networks can be constructed with the embedded TCRs generated by other algorithms, as shown in the code below. In the **Guided tutorial**, we used our own 30-digits TCR embedding. However, users are free to use any other embeddings of the TCRs with different dimensions, and our software implementation has taken this flexibility in input into consideration. All the parameter settings in the following code are the same as we described in **Model parameters**. Besides, two additional matrices are required in this code. The 'embedding' parameter indicates a .csv file containing the user-generated embedded TCRs, which are in the same format as the embeddings in the [example_TCRembedding.csv](https://github.com/jcao89757/TESSA/blob/master/example_data/example_TCRembedding.csv) (column numbers could be different, and the column names do not matter). The 'meta' parameter indicates a .csv file containing the initial TCR sequences and cell identifiers, which are in the same format as the [meta data matrix](https://github.com/jcao89757/TESSA/blob/master/example_data/example_TCRmeta.csv).
 ```{shell}
-python3 Tessa_main.py -exp ./example_data/example_exp.csv -embedding ./example_data/example_TCRembedding.csv -meta ./example_data/example_TCRmeta.csv -output_tessa /path/to/tessa_results/ -within_sample_networks TRUE -predefined_b ./example_data/fixed_b.csv
+python3 Tessa_main.py -exp ./example_data/example_exp.csv -embeding ./example_data/example_TCRembedding.csv -meta ./example_data/example_TCRmeta.csv -output_tessa /path/to/tessa_results/ -within_sample_networks TRUE -predefined_b ./example_data/fixed_b.csv
 ```
 ## Version update
 1.0.0: First release. (03-29-2020)
 
 1.1.0: Update output and add visulization functions. (11-19-2020)
 
+1.2.0: Bug fixed, dependencies updated. (02-03-2021)
 
+## Citation
+[Zhang, Z., Xiong, D., Wang, X. et al. Mapping the functional landscape of T cell receptor repertoires by single-T cell transcriptomics. *Nat Methods* **18**, 92–99 (2021).](https://doi.org/10.1038/s41592-020-01020-3)
 
