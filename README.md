@@ -19,6 +19,11 @@ tensorflow (version 1.11.0), numpy (version 1.19.5), pandas (version 0.23.4), ke
 **R Packages**
 
 Rtsne (version 0.15), MASS (version 7.3-51.4), LaplacesDemon (version 16.1.1), igraph (version 1.2.2)
+
+**Notes**
+
+02182021: One of the automatically installed dependencies, **h5py**, may raise potential problems. Please check and make sure the h5py version 2.10.0 is applied to your environment. 
+
 ## Guided tutorial
 In this tutorial, we will show a complete work flow from pre-processing TCR sequences with the BriseisEncoder to constructing TCR networks. The toy example data we used in this tutorial including the TCR sequences and the RNA expression data is availiable [here](https://github.com/jcao89757/TESSA/tree/master/example_data).
 ### Installation
