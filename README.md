@@ -24,6 +24,8 @@ Rtsne (version 0.15), MASS (version 7.3-51.4), LaplacesDemon (version 16.1.1), i
 
 02182021: One of the automatically installed dependencies, **h5py**, may raise potential problems. Please check and make sure the h5py version 2.10.0 is applied to your environment. 
 
+02272021: The **hclust** function from the R basic stats package does not work on the dataset with more than 65,536 TCRs. If you will apply tessa to an over-sized dataset, please install the R package 'fastcluster' and **switch 'hclust' to 'fastcluster::hclust'** in line 14 of [TESSA/initialization.R](https://github.com/jcao89757/TESSA/blob/1.3.0/Tessa/initialization.R).
+
 ## Guided tutorial
 In this tutorial, we will show a complete work flow from pre-processing TCR sequences with the BriseisEncoder to constructing TCR networks. The toy example data we used in this tutorial including the TCR sequences and the RNA expression data is availiable [here](https://github.com/jcao89757/TESSA/tree/master/example_data).
 ### Installation
