@@ -24,7 +24,7 @@ Rtsne (version 0.15), MASS (version 7.3-51.4), LaplacesDemon (version 16.1.1), i
 
 02182021: One of the automatically installed dependencies, **h5py**, may raise potential problems. Please check and make sure the h5py version 2.10.0 is applied to your environment. 
 
-02272021: The **hclust** function from the R basic stats package does not work on the dataset with more than 65,536 TCRs. If you will apply tessa to an over-sized dataset, please install the R package 'fastcluster' and **switch 'hclust' to 'fastcluster::hclust'** in line 14 of [TESSA/initialization.R](https://github.com/jcao89757/TESSA/blob/1.3.0/Tessa/initialization.R).
+02272021: The **hclust** function from the R basic stats package does not work on the dataset with more than 65,536 TCRs. If you will apply tessa to an over-sized dataset, please install the R package 'fastcluster' and **switch 'hclust' to 'fastcluster::hclust'** in line 14 in the script [TESSA/initialization.R](https://github.com/jcao89757/TESSA/blob/1.3.0/Tessa/initialization.R).
 
 ## Guided tutorial
 In this tutorial, we will show a complete work flow from pre-processing TCR sequences with the BriseisEncoder to constructing TCR networks. The toy example data we used in this tutorial including the TCR sequences and the RNA expression data is availiable [here](https://github.com/jcao89757/TESSA/tree/master/example_data).
@@ -102,7 +102,7 @@ python3 Tessa_main.py -exp ./example_data/example_exp.csv -embeding ./example_da
 ```
 
 ## Note 3: Potential applications of Tessa on TCR data from other species.
-Tessa has been fully validated on human single T cell RNA-Seq and TCR sequences. However, applications on other species such as mice, drosophila, etc., have not been tested. If the users would like to apply tessa on T cells from other species, please respond and your contribution is highly appreciated by the community. The first step to test the feasibility of tessa is to validate the Briseis embedding. The [following code](https://github.com/jcao89757/TESSA/blob/1.3.0/BriseisEncoder/OutputAccTest.py) is able to save two intermediate files, the Atchley embeded TCR sequences and the matrices of the same sizes reconstructed by the auto-encoder, both of which are saved in .json files. If the two sets of matrices achieve high consistancy, then the BriseisEncoder and the TCR embedding method could be applied to the TCR sequences from the unknown species.
+Tessa has been fully validated on human single T cell RNA-Seq and TCR sequences. However, applications on other species such as mice, drosophila, etc., have not been tested. If the users would like to apply tessa on T cells from other species, please report and your contribution is highly appreciated by the community. The first step to test the feasibility of tessa is to validate the Briseis embedding. The [following code](https://github.com/jcao89757/TESSA/blob/1.3.0/BriseisEncoder/OutputAccTest.py) is able to save two intermediate files, the Atchley embeded TCR sequences and the matrices of the same sizes reconstructed by the auto-encoder, both of which are saved in .json files. If the two sets of matrices achieve high consistancy, then the BriseisEncoder and the TCR embedding method could be applied to the TCR sequences from the unknown species.
 ```{shell}
 python3 OutputAccTest.py -tcr ../example_data/example_TCRmeta.csv -model TrainedEncoder.h5 -embeding_vectors Atchley_factors.csv -embeddedTCR_dir test1.json -decodedTCR_dir test2.json -output_log test.log
 ```
