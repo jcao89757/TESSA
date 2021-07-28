@@ -54,8 +54,6 @@ if '-tcr' in args:
                             save_tessa, is_sampleCluster, fixed_b])
     os.system(cmd_tessa1)
 
-else:
-    sys.exit('ERROR: please input valid TCRs/embeding.')
 if '-embeding' in args:
     #Mode 2: Tessa only
     exp_file = args[args.index('-exp') + 1]
@@ -70,3 +68,5 @@ if '-embeding' in args:
     cmd_tessa2 = ' '.join(['Rscript', base_path+'/Tessa/real_data.R', base_path+'/Tessa',exp_file, contigs_file, cdr3_file,
                            save_tessa, is_sampleCluster, fixed_b])
     os.system(cmd_tessa2)
+else:
+    sys.exit('ERROR: please input valid TCRs/embeding.')
