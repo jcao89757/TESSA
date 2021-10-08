@@ -1,7 +1,9 @@
 ![QBRC_logo](https://github.com/jcao89757/SCINA/blob/master/QBRC.jpg)
 # Tessa
 ## Introduction
-Tessa is a Bayesian model to integrate T cell receptor (TCR) sequence profiling with transcriptomes of T cells. Enabled by the recently developed single cell sequencing techniques, which provide both TCR sequences and RNA sequences of each T cell concurrently, Tessa maps the functional landscape of the TCR repertoire, and generates insights into understanding human immune response to diseases. As the first part of tessa, BriseisEncoder is employed prior to the Bayesian algorithm to capture the TCR sequence features and create numerical embeddings. We showed that the reconstructed Atchley Factor matrices and CDR3 sequences, generated through the numerical embeddings, are highly similar to their original counterparts. The CDR3 peptide sequences are constructed via a RandomForest model applied on the reconstructed Atchley Factor matrices. Please refer to our paper for more details: ['Mapping the Functional Landscape of TCR Repertoire.'](https://www.nature.com/articles/s41592-020-01020-3),Zhang, Z., Xiong, D., Wang, X. et al. 2021.
+Tessa is a Bayesian model to integrate T cell receptor (TCR) sequence profiling with transcriptomes of T cells. Enabled by the recently developed single cell sequencing techniques, which provide both TCR sequences and RNA sequences of each T cell concurrently, Tessa maps the functional landscape of the TCR repertoire, and generates insights into understanding human immune response to diseases. As the first part of tessa, BriseisEncoder is employed prior to the Bayesian algorithm to capture the TCR sequence features and create numerical embeddings. We showed that the reconstructed Atchley Factor matrices and CDR3 sequences, generated through the numerical embeddings, are highly similar to their original counterparts. The CDR3 peptide sequences are constructed via a RandomForest model applied on the reconstructed Atchley Factor matrices. 
+
+Please refer to our paper for more details: ['Mapping the Functional Landscape of TCR Repertoire.'](https://www.nature.com/articles/s41592-020-01020-3),Zhang, Z., Xiong, D., Wang, X. et al. 2021. ['Deep learning-based prediction of the T cell receptor–antigen binding specificity.'](https://www.nature.com/articles/s42256-021-00383-2), Lu, T., Zhang, Z., Zhu, J. et al. 2021.
 
 Researchers searching for more bioinformatics tools please visit our lab website: https://qbrc.swmed.edu/labs/wanglab/index.php.
 ##  Instructions
@@ -118,4 +120,6 @@ python3 OutputAccTest.py -tcr ../example_data/example_TCRmeta.csv -model Trained
 
 ## Citation
 [Zhang, Z., Xiong, D., Wang, X. et al. Mapping the functional landscape of T cell receptor repertoires by single-T cell transcriptomics. *Nat Methods* **18**, 92–99 (2021).](https://doi.org/10.1038/s41592-020-01020-3)
+
+[Lu, T., Zhang, Z., Zhu, J. et al. Deep learning-based prediction of the T cell receptor–antigen binding specificity. *Nat Mach Intell* (2021).]( https://doi.org/10.1038/s42256-021-00383-2)
 
